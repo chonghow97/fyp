@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="icon" href="./asset/image/favicon.png">
+  </head>
+  <body id="admin">
+    <div id="admin-sidebar">
+      <h3>Dashboard</h3><a href="customer.php">Customer</a><a href="billing.php">Billing</a><a href="admin_feedback.php">Feedback</a><a href="admin_plans.php">Plan</a><a href="admin_device.php">Device</a><a id="logout" href="index.php">Logout</a>
+    </div>
+    <div id="admin-container">
+      <div id="form-container">
+        <h1>Feedback</h1>
+        <hr>
+        <div id="row-b">
+          <form>
+            <label>Date</label>
+            <input type="date">
+          </form>
+        </div>
+        <table>
+          <tr>
+            <th>Email</th>
+            <th>Date</th>
+            <th>Title</th>
+            <th>Description</th>
+          </tr><?php 
+          	foreach($feedback as $f => $a){
+          		echo "<tr><td>".$feedback[$f]['email']."</td><td>".$feedback[$f]['date']."</td><td>".$feedback[$f]['title']."</td><td>".$feedback[$f]['description']."</td>";
+          	}
+          ?>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

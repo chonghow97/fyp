@@ -1,0 +1,22 @@
+doctype
+html
+	head
+		- var title = "Feedback"
+		include ../_include/header.jade
+	body
+		include ../_include/navbar.html
+		#feedback
+			.breadcrumb
+				p Feedback
+			#feedbackform
+				h1 Feedback
+				hr
+				form#formfeed(method="post" action="")
+					for title in [["Email","email","email"],["Title","text","title"]]
+						#row-a
+							label= title[0]
+							input(type=title[1] name=title[2])
+					label Description:
+					textarea(rows=5,cols=80 name="desc")
+					input(type="submit")
+		include ../_include/footer.html

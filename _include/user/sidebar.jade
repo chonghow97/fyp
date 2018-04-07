@@ -1,0 +1,10 @@
+#sidebar
+	ul
+		li
+			p Username
+			p Amount
+			p Address 1
+			p Address 2
+			p State
+		each val in [["Manage Account","manage"],["Topup","topup"],["Switch To","switchto"],["New Registration","newregister"]]
+			li: a(href=val[1]+".php")=val[0]

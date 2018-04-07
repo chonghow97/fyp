@@ -1,0 +1,23 @@
+doctype
+html
+	head
+		- var title = "Dashboard"
+		include ../_include/header.jade
+	body#admin
+		include ../_include/admin/sidebar.jade
+		#admin-container
+			#form-container
+				h1 Feedback
+				hr
+				#row-b
+					form
+						label Date
+						input(type="date")
+				table
+					tr: each th in ["Email","Date","Title","Description"]
+						th #{th}
+					|<?php 
+					|	foreach($feedback as $f => $a){
+					|		echo "<tr><td>".$feedback[$f]['email']."</td><td>".$feedback[$f]['date']."</td><td>".$feedback[$f]['title']."</td><td>".$feedback[$f]['description']."</td>";
+					|	}
+					| ?>

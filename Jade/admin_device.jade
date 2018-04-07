@@ -1,0 +1,28 @@
+doctype
+html
+	head
+		- var title = "Dashboard"
+		include ../_include/header.jade
+	body#admin
+		include ../_include/admin/sidebar.jade
+		#admin-container
+			#form-container
+				h1 Device
+				hr
+				#row-b
+					label Device Name
+					select: each option in [1,2,3,4,5]
+						option Device #{option}
+					#button
+						button Add
+						button Edit
+						button Delete
+				table
+					tr: each th in ["Brand","Contract","Price","Description"]
+						th #{th}
+					each tr in ["6-Month","12-Month","24-Month"]
+						tr: each td in [1,2,3,4]
+							td #{tr}
+
+
+

@@ -1,0 +1,28 @@
+doctype
+html
+	head
+		- var title = "Register"
+		include ../_include/header.jade
+	body
+		include ../_include/navbar.html
+		#user_container
+			#userleft
+				.breadcrumb
+					p Manage account
+				include ../_include/user/sidebar.jade
+			#Manage_account
+				#accountform
+					h1 Buy Plan
+					hr
+					form
+						p
+							label Plan
+							select
+								option Plan 1 --5
+								option Plan 2 --10
+								option Plan 3 --15
+								option Plan 4 --30
+						input(type="submit")
+							
+					
+		include ../_include/footer.html

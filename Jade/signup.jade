@@ -1,0 +1,33 @@
+doctype
+html
+	head
+		- var title = "Sign up- Register"
+		include ../_include/header.jade
+	body
+		include ../_include/navbar.html
+		#sign-up
+			.breadcrumb
+				p Register
+			form#sign-up(method="post", action!="<?php echo $_SERVER['PHP_SELF'] ?>")
+				#signup-col
+					each info in [["Username","text","uname"],["Firstname","text","fname"],["Lastname","text","lname"],["IC NO.","number","ic"],["Password","password","pass"]]
+						#row-form
+							label= info[0]
+							input(type=info[1], name=info[2])
+				#signup-col
+					each info in [["Phone No.","number","phone"],["Address 1","text","add1"],["Address 2","text","add2"]]
+						#row-form
+							label= info[0]
+							input(type=info[1], name=info[2])
+					#row-form
+						label State
+						select(name="state").
+							<?php 
+								foreach ($state as $key => $value) {
+									echo "<option value='".$state[$key]['sid']."'>".$state[$key]['sname']."</option>";
+								}
+							 ?>
+					#row-form
+						input(type="submit" name="register")
+
+		include ../_include/footer.html

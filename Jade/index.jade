@@ -1,0 +1,28 @@
+doctype
+html
+	head
+		- var title = "HomePage"
+		include ../_include/header.jade
+	body
+		include ../_include/navbar.html
+		#ads 
+			.adscontent
+				h3 Package1
+				hr
+				p   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat aperiam alias sit, quasi hic quidem ad, cupiditate ex, veritatis odio suscipit
+				button 
+					span Learn More
+			#circle
+				button(draggable=false)
+				button(draggable=false)
+				button(draggable=false)
+				button(draggable=false)
+			img(src="asset/image/image1.jpg" draggable="false")
+		#content
+			.sub-content
+				p Content 1
+			.sub-content
+				p Content 2
+			.sub-content
+				p Content 3
+		include ../_include/footer.html

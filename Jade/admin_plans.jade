@@ -1,0 +1,28 @@
+doctype
+html
+	head
+		- var title = "Dashboard"
+		include ../_include/header.jade
+	body#admin
+		include ../_include/admin/sidebar.jade
+		#admin-container
+			#form-container
+				h1 Plans
+				hr
+				#row-b
+					label Plans ID
+					select: each option in [1,2,3,4,5]
+						option Plans #{option}
+					#button
+						button Add
+						button Edit
+						button Delete
+				table
+					tr: each th in ["Plans Name","Type","Price","Description"]
+						th #{th}
+					each tr in [1,2,3,4,5,6,7,8,9,10]
+						tr: each td in [1,2,3,4]
+							td #{tr}
+
+
+

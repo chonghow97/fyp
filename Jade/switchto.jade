@@ -1,0 +1,25 @@
+doctype
+html
+	head
+		- var title = "Switch To..."
+		include ../_include/header.jade
+	body
+		include ../_include/navbar.html
+		#user_container
+			#userleft
+				.breadcrumb
+					p Manage account
+				include ../_include/user/sidebar.jade
+			#Manage_account
+				#accountform
+					h1 Switch To
+					hr
+					form
+						p
+							label Service
+							select
+								option Postpaid
+								option Prepaid
+						input(type="submit")
+					
+		include ../_include/footer.html

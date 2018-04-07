@@ -1,0 +1,12 @@
+h1 Manage Account
+hr
+#formcontain
+	label Phone.no
+	input(type=text)
+	p Bill History
+	table
+		tr: each th in ["trans ID","Description","date/time"]
+			th #{th}
+		each tr in [1,2,3,4,5,6,7,8,9,10]
+			tr: each td in [1,2,3]
+				td #{tr}

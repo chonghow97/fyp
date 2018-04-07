@@ -1,0 +1,30 @@
+doctype
+html
+	head
+		- var title = "Manage Account"
+		include ../_include/header.jade
+	body
+		include ../_include/navbar.html
+		#user_container
+			#userleft
+				.breadcrumb
+					p Manage account
+				include ../_include/user/sidebar.jade
+			#Manage_account
+				#accountform
+					h1 Manage Account
+					hr
+					form
+						for a in ["Username","password","Email"]
+							p
+								label=a
+								input(type="text")
+						#right
+							for a in ["Phone.No","Address 1","Address 2","State"]
+								p
+									label=a
+									input(type="text")
+						input(type="submit" value="update")
+
+
+		include ../_include/footer.html

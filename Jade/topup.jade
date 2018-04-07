@@ -1,0 +1,27 @@
+doctype
+html
+	head
+		- var title = "Top Up"
+		include ../_include/header.jade
+	body
+		include ../_include/navbar.html
+		#user_container
+			#userleft
+				.breadcrumb
+					p Manage account
+				include ../_include/user/sidebar.jade
+			#Manage_account
+				#accountform
+					h1 Top Up
+					hr
+					form
+						p
+							label Phone No.
+							input(type="number")
+						p
+							label Amount
+							select: for option in [5,10,30,50,100]
+								option=option
+						input(type="submit")
+					
+		include ../_include/footer.html
