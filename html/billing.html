@@ -9,95 +9,19 @@
   </head>
   <body id="admin">
     <div id="admin-sidebar">
-      <h3>Dashboard</h3><a href="customer.php">Customer</a><a href="billing.php">Billing</a><a href="admin_feedback.php">Feedback</a><a href="admin_plans.php">Plan</a><a href="admin_device.php">Device</a><a id="logout" href="index.php">Logout</a>
+      <h3>Dashboard</h3><a href="customer.php">Customer</a><a href="billing.php">Billing</a><a href="faq.php">FAQ</a><a href="admin_feedback.php">Feedback</a><a href="admin_plans.php">Plan</a><a id="logout" href="index.php">Back to index</a>
     </div>
     <div id="admin-container">
       <div id="form-container">
         <h1>Billing</h1>
         <hr>
-        <div id="row-b">
-          <label>Username</label>
-          <select>
-            <option>User 1</option>
-            <option>User 2</option>
-            <option>User 3</option>
-            <option>User 4</option>
-            <option>User 5</option>
-          </select>
-          <div id="button">
-            <button>Add</button>
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-        </div>
         <table>
           <tr>
-            <th>Transaction ID</th>
-            <th>Payment Amount</th>
-            <th>Date</th>
-            <th>Method</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>3</td>
-            <td>3</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>4</td>
-            <td>4</td>
-            <td>4</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>5</td>
-            <td>5</td>
-            <td>5</td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>7</td>
-            <td>7</td>
-            <td>7</td>
-          </tr>
-          <tr>
-            <td>8</td>
-            <td>8</td>
-            <td>8</td>
-            <td>8</td>
-          </tr>
-          <tr>
-            <td>9</td>
-            <td>9</td>
-            <td>9</td>
-            <td>9</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td>10</td>
-            <td>10</td>
-            <td>10</td>
-          </tr>
-        </table>
+            <th>Username</th>
+            <th>Amount</th>
+            <th>Action</th>
+          </tr><?php if(!empty($row)){foreach ($row as $r) {echo "<tr><td>$r[1]</td><td>$r[2]</td><td><button><a href='billing.php?id=$r[0]'>Edit</a></button></td></tr>"; } } ?>
+        </table><?php if(isset($_GET['id'])){$id = $_GET['id']; $asd = mysqli_fetch_array(mysqli_query($link,"SELECT `Amount` FROM user WHERE `uid`='$id'")); echo mysqli_error($link); echo "<h1>Edit</h1> <hr><form action='' method='post'> <p style='margin:1rem 2rem'><label>Amount: </label> <input style='margin: 0 2rem' type='text' value='$asd[0]' name='amt'><input type='hidden' value='$id' name='id'><input type='submit' name='edit'></p></form>"; } ?>
       </div>
     </div>
   </body>

@@ -9,6 +9,7 @@
 		if(!$result){
 			echo mysqli_error($link);
 		}else{
+			echo "<script>alert('sent');window.location.replace('feedback.php')</script>;";
 			mysqli_close($link);
 		}
 	}

@@ -7,22 +7,16 @@ html
 		include ../_include/admin/sidebar.jade
 		#admin-container
 			#form-container
+				|<?php if(isset($_GET['add'])){echo "<h1>Add</h1> <hr> <form action='' method='post'> <p style='margin: 1rem 2rem;'> <label>Name: </label> <input type='text' name='name'> <label style='margin-left:2rem;'>Type: </label> <select name='type'> <option value='postpaid'>Postpaid</option> <option value='prepaid'>Prepaid</option> </select> <label style='margin-left:2rem;'>Price: </label> <input type='number' name='price'> </p> <p> <input type='submit' style='margin-left: 2rem' name='add1'> </p> </form>"; } ?>
 				h1 Plans
 				hr
-				#row-b
-					label Plans ID
-					select: each option in [1,2,3,4,5]
-						option Plans #{option}
-					#button
-						button Add
-						button Edit
-						button Delete
+				p(style="margin:1rem 2rem;")
+					button: a(href="admin_plans.php?add") Add
 				table
-					tr: each th in ["Plans Name","Type","Price","Description"]
-						th #{th}
-					each tr in [1,2,3,4,5,6,7,8,9,10]
-						tr: each td in [1,2,3,4]
-							td #{tr}
+					tr: each th in ["Plans Name","Type","Price","Action"]
+						th=th
+					|<?php foreach ($plans as $p) {echo "<tr><td>$p[1]</td><td>$p[2]</td><td>$p[3]</td><td><button><a href='admin_plans.php?id=$p[0]'>Edit</a></button><button><a onclick='return confirm(".'"Are you sure want to delete?"'.")' href='admin_plans.php?delete=$p[0]'>Delete</a></button></td></tr>"; } ?>
+				|<?php if(isset($_GET['id'])){$id = $_GET['id']; $infoz = mysqli_fetch_array(mysqli_query($link,"SELECT * FROM plans WHERE `pid`='$id'"));echo "<h1>Edit</h1> <hr> <form action='' method='post'> <p style='margin: 1rem 2rem;'> <label>Name: </label> <input type='text' name='name' value='$infoz[1]'> <label style='margin-left:2rem;'>Type: </label> <select name='type'> <option value='postpaid'>Postpaid</option> <option value='prepaid'>Prepaid</option> </select> <label style='margin-left:2rem;'>Price: </label> <input type='number' name='price' value='$infoz[3]'> </p> <p> <input type='submit' style='margin-left: 2rem' name='edit'></p> <input type='hidden' style='margin-left: 2rem' name='id' value='$infoz[0]'> </form> "; } ?>
 
 
 

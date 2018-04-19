@@ -1,0 +1,20 @@
+doctype
+html
+	head
+		- var title = "Dashboard"
+		include ../_include/header.jade
+	body#admin
+		include ../_include/admin/sidebar.jade
+		#admin-container
+			#form-container
+				|<?php if(isset($_POST['add'])){echo "<h1>Add</h1><hr><form action='' method='post'> <p style='margin: 1rem 2rem'><label>Question: </label><input type='text' name='question'></p> <p style='margin: 1rem 2rem'><label>Answer: </label><input type='text' name='answer'></p> <input type='submit' style='margin-left: 2rem' name='add1'> </form>"; } ?>
+				h1 Faq
+				hr
+				br
+				form(action="" method="post" style="margin-left: 2rem")
+					button(name="add") Add
+				table
+					tr: each th in ["Question","Answer","Action"]
+						th=th
+					|<?php foreach($info as $i){echo "<tr><td>$i[1]</td><td>$i[2]</td><td><button><a href='faq.php?id=$i[0]'>Edit</a></button><button><a onclick='return confirm(".'"Are you sure want to delete?"'.")' href='faq.php?delete=$i[0]'>Delete</a></button></td></tr>"; } ?>
+				|<?php if(isset($_GET['id'])){$id = $_GET['id']; $iz = mysqli_query($link,"SELECT `fq`,`fa` FROM faq WHERE `fid`='$id'"); $iz = mysqli_fetch_array($iz); echo "<h1>Edit</h1><hr><form action='' method='post'> <p style='margin: 1rem 2rem'><label>Question: </label><input type='text' name='question1' value='$iz[1]'></p> <p style='margin: 1rem 2rem'><label>Answer: </label><input type='text' name='answer1' value='$iz[0]'></p> <input type='hidden' style='margin-left: 2rem' value='$id' name='id'><input type='submit' style='margin-left: 2rem' name='edit'> </form>"; } ?>

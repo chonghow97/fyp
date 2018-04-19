@@ -9,95 +9,23 @@
   </head>
   <body id="admin">
     <div id="admin-sidebar">
-      <h3>Dashboard</h3><a href="customer.php">Customer</a><a href="billing.php">Billing</a><a href="admin_feedback.php">Feedback</a><a href="admin_plans.php">Plan</a><a href="admin_device.php">Device</a><a id="logout" href="index.php">Logout</a>
+      <h3>Dashboard</h3><a href="customer.php">Customer</a><a href="billing.php">Billing</a><a href="faq.php">FAQ</a><a href="admin_feedback.php">Feedback</a><a href="admin_plans.php">Plan</a><a id="logout" href="index.php">Back to index</a>
     </div>
     <div id="admin-container">
-      <div id="form-container">
+      <div id="form-container"><?php if(isset($_GET['add'])){echo "<h1>Add</h1> <hr> <form action='' method='post'> <p style='margin: 1rem 2rem;'> <label>Name: </label> <input type='text' name='name'> <label style='margin-left:2rem;'>Type: </label> <select name='type'> <option value='postpaid'>Postpaid</option> <option value='prepaid'>Prepaid</option> </select> <label style='margin-left:2rem;'>Price: </label> <input type='number' name='price'> </p> <p> <input type='submit' style='margin-left: 2rem' name='add1'> </p> </form>"; } ?>
         <h1>Plans</h1>
         <hr>
-        <div id="row-b">
-          <label>Plans ID</label>
-          <select>
-            <option>Plans 1</option>
-            <option>Plans 2</option>
-            <option>Plans 3</option>
-            <option>Plans 4</option>
-            <option>Plans 5</option>
-          </select>
-          <div id="button">
-            <button>Add</button>
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-        </div>
+        <p style="margin:1rem 2rem;">
+          <button><a href="admin_plans.php?add">Add</a></button>
+        </p>
         <table>
           <tr>
             <th>Plans Name</th>
             <th>Type</th>
             <th>Price</th>
-            <th>Description</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>3</td>
-            <td>3</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>4</td>
-            <td>4</td>
-            <td>4</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>5</td>
-            <td>5</td>
-            <td>5</td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-            <td>6</td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>7</td>
-            <td>7</td>
-            <td>7</td>
-          </tr>
-          <tr>
-            <td>8</td>
-            <td>8</td>
-            <td>8</td>
-            <td>8</td>
-          </tr>
-          <tr>
-            <td>9</td>
-            <td>9</td>
-            <td>9</td>
-            <td>9</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td>10</td>
-            <td>10</td>
-            <td>10</td>
-          </tr>
-        </table>
+            <th>Action</th>
+          </tr><?php foreach ($plans as $p) {echo "<tr><td>$p[1]</td><td>$p[2]</td><td>$p[3]</td><td><button><a href='admin_plans.php?id=$p[0]'>Edit</a></button><button><a onclick='return confirm(".'"Are you sure want to delete?"'.")' href='admin_plans.php?delete=$p[0]'>Delete</a></button></td></tr>"; } ?>
+        </table><?php if(isset($_GET['id'])){$id = $_GET['id']; $infoz = mysqli_fetch_array(mysqli_query($link,"SELECT * FROM plans WHERE `pid`='$id'"));echo "<h1>Edit</h1> <hr> <form action='' method='post'> <p style='margin: 1rem 2rem;'> <label>Name: </label> <input type='text' name='name' value='$infoz[1]'> <label style='margin-left:2rem;'>Type: </label> <select name='type'> <option value='postpaid'>Postpaid</option> <option value='prepaid'>Prepaid</option> </select> <label style='margin-left:2rem;'>Price: </label> <input type='number' name='price' value='$infoz[3]'> </p> <p> <input type='submit' style='margin-left: 2rem' name='edit'></p> <input type='hidden' style='margin-left: 2rem' name='id' value='$infoz[0]'> </form> "; } ?>
       </div>
     </div>
   </body>

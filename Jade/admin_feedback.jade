@@ -10,14 +10,24 @@ html
 				h1 Feedback
 				hr
 				#row-b
-					form
+					form(method='post' action!="<?php echo $_SERVER['PHP_SELF'] ?>")
 						label Date
-						input(type="date")
+						input(type="date" name='date' required)
+						input(type="submit" name='sub')
 				table
-					tr: each th in ["Email","Date","Title","Description"]
-						th #{th}
+					tr: for th in ['Email','Title','Description','Date','Action']
+						th=th
 					|<?php 
-					|	foreach($feedback as $f => $a){
-					|		echo "<tr><td>".$feedback[$f]['email']."</td><td>".$feedback[$f]['date']."</td><td>".$feedback[$f]['title']."</td><td>".$feedback[$f]['description']."</td>";
+					|	if(!empty($row)){
+					|		foreach($row as $r){
+					|	$a = "confirm('z z')";	
+					|			echo "<tr><td>$r[0]</td><td>$r[2]</td><td>$r[3]</td><td>$r[1]</td><td><a href='admin_feedback.php?id=$r[4]'>Edit</a><a href='admin_feedback.php?delete=$r[4]'>Delete</a></td></tr>";
+					|		}
+					|	}else{
+					|		echo "<tr><td colspan='5'> No record found</td></tr>";
 					|	}
 					| ?>
+				| <?php
+				|	if(isset($_GET['id'])){
+				|		echo "<h1>Edit</h1> <hr> <form method='post' action='$_SERVER[PHP_SELF]'> <p style='margin-top: 1rem'><label style='margin:0 2rem'>Title</label><input type='text' name='title1' value='$row1[0]'></p><p style='margin-top: 1rem'><label style='margin:0 2rem'>Description</label><input type='text' name='desc' value='$row1[1]'></p><p><input type='submit' style='margin: 1rem 2rem' value='Update' name='upt'></p><input type='hidden' name='id' value='$row1[2]'></form>";	}
+				| ?>

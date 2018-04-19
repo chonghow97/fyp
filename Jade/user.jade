@@ -1,7 +1,7 @@
 doctype
 html
 	head
-		- var title = "Manage Account"
+		- var title = "Top Up"
 		include ../_include/header.jade
 	body
 		include ../_include/navbar.html
@@ -14,12 +14,4 @@ html
 				#accountform
 					h1 Manage Account
 					hr
-					form(action="" method="post")
-						for a in [["Old password","opsw"],["New password","npsw"],["Confirm password","cpsw"]]
-							p
-								label=a[0]
-								input(type="password" name=a[1] required)
-						input(type="submit" value="update" name="update")
-
-
 		include ../_include/footer.html

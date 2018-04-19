@@ -15,7 +15,7 @@
 		$add1 = htmlentities($_POST['add1']);	
 		$add2 = htmlentities($_POST['add2']);	
 		$state = htmlentities($_POST['state']);	
-		$sql = "INSERT INTO user VALUES(NULL,'$username','$firstname','$lastname','$ic','$password','$phone','$add1','$add2','$state')";
+		$sql = "INSERT INTO user VALUES(NULL,'$username','$firstname','$lastname','$ic','$password','$phone','$add1','$add2','$state',0)";
 
 		if($result = mysqli_query($link,$sql)){
 			echo "<script>alert('created successfully')</script>";

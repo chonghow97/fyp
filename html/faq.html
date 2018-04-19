@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="icon" href="./asset/image/favicon.png">
+  </head>
+  <body id="admin">
+    <div id="admin-sidebar">
+      <h3>Dashboard</h3><a href="customer.php">Customer</a><a href="billing.php">Billing</a><a href="faq.php">FAQ</a><a href="admin_feedback.php">Feedback</a><a href="admin_plans.php">Plan</a><a id="logout" href="index.php">Back to index</a>
+    </div>
+    <div id="admin-container">
+      <div id="form-container"><?php if(isset($_POST['add'])){echo "<h1>Add</h1><hr><form action='' method='post'> <p style='margin: 1rem 2rem'><label>Question: </label><input type='text' name='question'></p> <p style='margin: 1rem 2rem'><label>Answer: </label><input type='text' name='answer'></p> <input type='submit' style='margin-left: 2rem' name='add1'> </form>"; } ?>
+        <h1>Faq</h1>
+        <hr><br>
+        <form action="" method="post" style="margin-left: 2rem">
+          <button name="add">Add</button>
+        </form>
+        <table>
+          <tr>
+            <th>Question</th>
+            <th>Answer</th>
+            <th>Action</th>
+          </tr><?php foreach($info as $i){echo "<tr><td>$i[1]</td><td>$i[2]</td><td><button><a href='faq.php?id=$i[0]'>Edit</a></button><button><a onclick='return confirm(".'"Are you sure want to delete?"'.")' href='faq.php?delete=$i[0]'>Delete</a></button></td></tr>"; } ?>
+        </table><?php if(isset($_GET['id'])){$id = $_GET['id']; $iz = mysqli_query($link,"SELECT `fq`,`fa` FROM faq WHERE `fid`='$id'"); $iz = mysqli_fetch_array($iz); echo "<h1>Edit</h1><hr><form action='' method='post'> <p style='margin: 1rem 2rem'><label>Question: </label><input type='text' name='question1' value='$iz[1]'></p> <p style='margin: 1rem 2rem'><label>Answer: </label><input type='text' name='answer1' value='$iz[0]'></p> <input type='hidden' style='margin-left: 2rem' value='$id' name='id'><input type='submit' style='margin-left: 2rem' name='edit'> </form>"; } ?>
+      </div>
+    </div>
+  </body>
+</html>

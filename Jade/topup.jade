@@ -14,14 +14,11 @@ html
 				#accountform
 					h1 Top Up
 					hr
-					form
-						p
-							label Phone No.
-							input(type="number")
+					form(action="" method="post")
 						p
 							label Amount
-							select: for option in [5,10,30,50,100]
-								option=option
-						input(type="submit")
+							select(name="amt"): for option in [5,10,30,50,100]
+								option(value=option)=option
+						input(type="submit" name="top")
 					
 		include ../_include/footer.html

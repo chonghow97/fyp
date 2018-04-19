@@ -9,30 +9,40 @@
   </head>
   <body id="admin">
     <div id="admin-sidebar">
-      <h3>Dashboard</h3><a href="customer.php">Customer</a><a href="billing.php">Billing</a><a href="admin_feedback.php">Feedback</a><a href="admin_plans.php">Plan</a><a href="admin_device.php">Device</a><a id="logout" href="index.php">Logout</a>
+      <h3>Dashboard</h3><a href="customer.php">Customer</a><a href="billing.php">Billing</a><a href="faq.php">FAQ</a><a href="admin_feedback.php">Feedback</a><a href="admin_plans.php">Plan</a><a id="logout" href="index.php">Back to index</a>
     </div>
     <div id="admin-container">
       <div id="form-container">
         <h1>Feedback</h1>
         <hr>
         <div id="row-b">
-          <form>
+          <form method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
             <label>Date</label>
-            <input type="date">
+            <input type="date" name="date" required>
+            <input type="submit" name="sub">
           </form>
         </div>
         <table>
           <tr>
             <th>Email</th>
-            <th>Date</th>
             <th>Title</th>
             <th>Description</th>
+            <th>Date</th>
+            <th>Action</th>
           </tr><?php 
-          	foreach($feedback as $f => $a){
-          		echo "<tr><td>".$feedback[$f]['email']."</td><td>".$feedback[$f]['date']."</td><td>".$feedback[$f]['title']."</td><td>".$feedback[$f]['description']."</td>";
+          	if(!empty($row)){
+          		foreach($row as $r){
+          	$a = "confirm('z z')";	
+          			echo "<tr><td>$r[0]</td><td>$r[2]</td><td>$r[3]</td><td>$r[1]</td><td><a href='admin_feedback.php?id=$r[4]'>Edit</a><a href='admin_feedback.php?delete=$r[4]'>Delete</a></td></tr>";
+          		}
+          	}else{
+          		echo "<tr><td colspan='5'> No record found</td></tr>";
           	}
           ?>
-        </table>
+        </table><?php
+        	if(isset($_GET['id'])){
+        		echo "<h1>Edit</h1> <hr> <form method='post' action='$_SERVER[PHP_SELF]'> <p style='margin-top: 1rem'><label style='margin:0 2rem'>Title</label><input type='text' name='title1' value='$row1[0]'></p><p style='margin-top: 1rem'><label style='margin:0 2rem'>Description</label><input type='text' name='desc' value='$row1[1]'></p><p><input type='submit' style='margin: 1rem 2rem' value='Update' name='upt'></p><input type='hidden' name='id' value='$row1[2]'></form>";	}
+        ?>
       </div>
     </div>
   </body>

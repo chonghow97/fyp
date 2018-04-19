@@ -7,7 +7,32 @@
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <link rel="icon" href="./asset/image/favicon.png">
   </head>
-  <body><nav id="navbar">
+  <body><?php 
+session_start();
+$link = mysqli_connect('localhost','root','','fyp');
+if(isset($_POST['signin'])){
+	$name = $_POST['uname'];
+	$pass = $_POST['upass'];
+	if($name == "admin"){
+		header("Location: customer.php");		
+	}else{
+		if($result=mysqli_query($link,"SELECT `uid`,`password`,`uname` FROM USER WHERE `uname`='$name'")){
+			$row = mysqli_fetch_array($result);
+			if(password_verify($pass,$row[1])){
+				$_SESSION["islogin"] = true;
+				$_SESSION["username"]= $name;
+				$_SESSION["id"] = $row[0];
+				header("Location: manage.php");
+			}else{
+				echo "<script>alert('invalid password');window.location.replace('index.php')</script>";
+			}
+		}else{
+			echo "<script>alert('invalid account')</script>";
+		}
+	}
+}
+?>
+<nav id="navbar">
 	<div id="brand">
 		<p><a href="customer.php">S-Mobile</a></p>
 	</div>
@@ -20,14 +45,16 @@
 		</ul>
 	</div>
 	<?php 
-		if(0){
-			echo "<div id='user1'> <p>Welcome, <span>Username</span></p> </div>";
-		}else{
-			echo '<form id="login"> <div id="row"> <label>Username</label> <input type="text" name=""> </div> <div id="row"> <label>Password</label> <input type="text" name=""> </div> <div id="button"> <button><a href="manage.php">Sign in</a></button> <button><a href="signup.php">Sign up</a></button> </div> </form>'; 
-		}
-?>
-	
-	
+	if(isset($_SESSION["islogin"]) && $_SESSION["islogin"]){
+		echo "<div id='user1'> <p>Welcome, <a href='manage.php' style='color: white; font-weight: bold;'>".$_SESSION["username"]."</a><a href='".$_SERVER['PHP_SELF']."?logout'>Logout</a></p></div>";
+	}else{
+		echo '<form id="login" action="" method="post"> <div id="row"> <label>Username</label> <input type="text" name="uname" required> </div> <div id="row"> <label>Password</label> <input type="password" name="upass" required> </div> <div id="button"> <button name="signin">Sign in</button> <button><a href="signup.php">Sign up</a></button> </div> </form>'; 
+	}
+	if(isset($_GET['logout'])){
+		session_destroy();
+		header("Location: index.php");
+	}
+	?>
 </nav>
     <div id="feedback">
       <div class="breadcrumb">
